@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tornado Hotel Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color:#8E7CC2;
+      color: #7A0EC5;
+      padding: 20px;
+    }
+    
+    h1 {
+      margin: 0;
+    }
+    
+    main {
+      margin: 20px;
+    }
+    
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #7A0EC5;
+    }
+    
+    input[type="submit"] {
+      background-color: #7A0EC5;
+      color: ##26564E ;
+      cursor: pointer;
+    }
+    
+    .hotel-card {
+      background-color: #FFC300 ;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Galaxy Hotel Booking</h1>
+  </header>
+  
+  <main>
+    <form id="booking-form">
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="date" placeholder="Check-in Date" required>
+      <input type="date" placeholder="Check-out Date" required>
+      <input type="number" placeholder="Number of Guests" required>
+      <input type="submit" value="Book Now">
+    </form>
+    
+    <div id="hotel-list"></div>
+  </main>
+  
+  <script>
+    const form = document.getElementById('booking-form');
+    const hotelList = document.getElementById('hotel-list');
+    
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const name = form.elements[0].value;
+      const email = form.elements[1].value;
+      const checkInDate = form.elements[2].value;
+      const checkOutDate = form.elements[3].value;
+      const numGuests = form.elements[4].value;
+      
+      const bookingData = {
+        name,
+        email,
+        checkInDate,
+        checkOutDate,
+        numGuests
+      };
+      
+      // Here you can send the booking data to a server for further processing, e.g., saving it to a database
+      
+      // For now, let's display a simple hotel card with the booking details
+      
+      const hotelCard = document.createElement('div');
+      hotelCard.classList.add('hotel-card');
+      
+      const bookingDetails = document.createElement('p');
+      bookingDetails.innerHTML = `
+        <strong>Name:</strong> ${name}<br>
+        <strong>Email:</strong> ${email}<br>
+        <strong>Check-in Date:</strong> ${checkInDate}<br>
+        <strong>Check-out Date:</strong> ${checkOutDate}<br>
+        <strong>Number of Guests:</strong> ${numGuests}
+      `;
+      
+      hotelCard.appendChild(bookingDetails);
+      hotelList.appendChild(hotelCard);
+      
+      // Reset the form
+      form.reset();
+    });
+  </script>
+</body>
+</html>
